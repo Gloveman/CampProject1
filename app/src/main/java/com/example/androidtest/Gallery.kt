@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.androidtest.databinding.FragmentGalleryBinding
 
-class Gallery :Fragment(){ //dkdkdkdkd
+class Gallery :Fragment(){
     private lateinit var binding: FragmentGalleryBinding
     override fun onCreateView(
         inflater:LayoutInflater,

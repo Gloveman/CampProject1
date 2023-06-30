@@ -11,7 +11,7 @@ import org.json.JSONArray
 class ContactInfo:Fragment() {
     private lateinit var binding:FragmentContactinfoBinding
     lateinit var ListAdapter:listadapter
-    val datas= mutableListOf<String>()
+    val datas= mutableListOf<ContactData>()
     override fun onCreateView(
         inflater:LayoutInflater,
         container:ViewGroup?,
@@ -34,10 +34,9 @@ class ContactInfo:Fragment() {
         binding.contactlist.adapter=ListAdapter
         for (i in 0 until contactarray.length()){
             val single=contactarray.getJSONObject(i)
-            var S=single.getString("name")
-            S+="\n"
-            S+=single.getString("number")
-            datas.add(S)
+            val name=single.getString("name")
+            val number=single.getString("number")
+            datas.add(ContactData(name=name,number=number))
         }
         ListAdapter.datas=datas
         ListAdapter.notifyDataSetChanged()
