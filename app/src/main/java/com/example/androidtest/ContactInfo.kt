@@ -5,6 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.androidtest.databinding.FragmentContactinfoBinding
 import org.json.JSONArray
 
@@ -25,6 +27,7 @@ class ContactInfo:Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val binding=FragmentContactinfoBinding.bind(view)
         val inputStream=resources.assets.open("contact.json")
+
         val size=inputStream.available()
         val buffer=ByteArray(size)
         inputStream.read(buffer)
@@ -40,6 +43,7 @@ class ContactInfo:Fragment() {
         }
         ListAdapter.datas=datas
         ListAdapter.notifyDataSetChanged()
+        binding.contactlist.addItemDecoration(DividerItemDecoration(this.context,LinearLayoutManager.VERTICAL))
         //binding.textView.text=S;
     }
 

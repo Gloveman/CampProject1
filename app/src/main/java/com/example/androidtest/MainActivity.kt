@@ -19,7 +19,10 @@ class MainActivity : AppCompatActivity() {
         vp.adapter=viewpageradapter(supportFragmentManager,lifecycle)
 
         TabLayoutMediator(tl,vp){tab,position->
-            tab.text= "Tab ${position+1}"
+            when(position){
+                0->tab.text= "Contacts"
+                1->tab.text= "Gallery"
+            }
         }.attach()
         }
 
