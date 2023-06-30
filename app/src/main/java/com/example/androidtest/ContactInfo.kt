@@ -1,5 +1,6 @@
 package com.example.androidtest
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +10,10 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.androidtest.databinding.FragmentContactinfoBinding
 import org.json.JSONArray
+import android.provider.ContactsContract
+import android.database.Cursor
+import android.provider.ContactsContract.Contacts
+
 
 class ContactInfo:Fragment() {
     private lateinit var binding:FragmentContactinfoBinding
@@ -23,24 +28,23 @@ class ContactInfo:Fragment() {
         return binding.root
     }
 
+    @SuppressLint("Range")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val binding=FragmentContactinfoBinding.bind(view)
-        val inputStream=resources.assets.open("contact.json")
 
-        val size=inputStream.available()
-        val buffer=ByteArray(size)
-        inputStream.read(buffer)
-        inputStream.close()
-        val contactarray=JSONArray(String(buffer,Charsets.UTF_8))
-        ListAdapter= listadapter(this.context)
-        binding.contactlist.adapter=ListAdapter
-        for (i in 0 until contactarray.length()){
-            val single=contactarray.getJSONObject(i)
-            val name=single.getString("name")
-            val number=single.getString("number")
+        val cursor=requireActivity().contentResolver.query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI,null,null,null,null)
+        while(cursor!!.moveToNext()){
+
+            val name=cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME))
+            val number=cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER))
+
             datas.add(ContactData(name=name,number=number))
         }
+        ListAdapter= listadapter(this.context)
+        binding.contactlist.adapter=ListAdapter
+
+        cursor.close()
         ListAdapter.datas=datas
         ListAdapter.notifyDataSetChanged()
         binding.contactlist.addItemDecoration(DividerItemDecoration(this.context,LinearLayoutManager.VERTICAL))

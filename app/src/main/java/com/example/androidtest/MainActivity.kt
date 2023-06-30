@@ -24,8 +24,8 @@ class MainActivity : AppCompatActivity() {
                 1->tab.text= "Gallery"
             }
         }.attach()
-        }
 
+        }
     override fun onResume() {
         super.onResume()
 

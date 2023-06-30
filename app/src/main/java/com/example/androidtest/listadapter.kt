@@ -38,7 +38,7 @@ class listadapter(private val context: Context?):RecyclerView.Adapter<listadapte
                     ) { dialog, which ->
 
                             val tst=Toast.makeText(context, "Call finished!", Toast.LENGTH_SHORT)
-                                tst.setGravity(Gravity.BOTTOM, 0, 0)
+                            tst.setGravity(Gravity.BOTTOM, 0, 0)
                             tst.show()
 
                     }
