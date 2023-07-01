@@ -40,4 +40,5 @@ class Gallery : Fragment() {
         }
         listAdapter.notifyDataSetChanged()
     }
+
 }

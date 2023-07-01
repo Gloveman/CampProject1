@@ -35,16 +35,16 @@ class listadapter(private val context: Context?):RecyclerView.Adapter<listadapte
             number.text=data.number
             itemView.setOnClickListener{
                 AlertDialog.Builder(context)
-                    .setTitle("Call")
-                    .setMessage("call to ${number.text} ?")
-                    .setPositiveButton("Call"
+                    .setTitle("전화 걸기")
+                    .setMessage("${name.text}에게 전화를 걸까요?")
+                    .setPositiveButton("전화 걸기"
                     ) { dialog, which ->
 
                             val callIntent=Intent(Intent.ACTION_CALL);
                         callIntent.data = Uri.parse("tel:${number.text}")
                         context?.startActivity(callIntent,null)
                     }
-                    .setNegativeButton("Cancel",null)
+                    .setNegativeButton("취소",null)
                     .create()
                     .show()
             }

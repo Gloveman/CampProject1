@@ -1,6 +1,7 @@
 package com.example.recyclerview02
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +12,8 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.example.androidtest.R
 import com.bumptech.glide.Glide
+import com.example.androidtest.ImageViewActivity
+
 //import kotlinx.android.synthetic.main.list_grid_item.view.*
 
 class ListAdapterGrid(val list: MutableList<String>,val act: Fragment,val context: Context?): RecyclerView.Adapter<ListAdapterGrid.GridAdapter>() {
@@ -27,13 +30,15 @@ class ListAdapterGrid(val list: MutableList<String>,val act: Fragment,val contex
         Glide.with(act)
             .load(item)
             .into(holder.itemView.findViewById(R.id.img))
-        //holder.layout.findViewById<TextView>(R.id.textListTitle).text = item
 
-/*
         holder.layout.setOnClickListener {
-            Toast.makeText(holder.layout.context, "$item Click!", Toast.LENGTH_SHORT).show()
+           //move to ImageView activity
+            val  imgview=Intent(context,ImageViewActivity::class.java)
+            imgview.putExtra("position",position)
+            context?.startActivity(imgview)
+
         }
-*/
+
     }
 
     override fun getItemCount(): Int {
