@@ -29,23 +29,13 @@ class MainActivity : AppCompatActivity() {
                         when (position) {
                             0 -> tab.text = "Contacts"
                             1 -> tab.text = "Gallery"
-                            2 -> tab.text = "Memo"
+                            2 -> tab.text = "Calendar"
                         }
                     }.attach()
                 } else {
                     requestPermissions(permArray, 1357)
                 }
-        var vp = binding.viewPager
-        var tl = binding.tabLayout
-        vp.adapter = viewpageradapter(supportFragmentManager, lifecycle)
 
-        TabLayoutMediator(tl, vp) { tab, position ->
-            when (position) {
-                0 -> tab.text = "Contacts"
-                1 -> tab.text = "Gallery"
-                2 -> tab.text = "Memo"
-            }
-        }.attach()
     }
 
     override fun onResume() {
@@ -59,7 +49,19 @@ class MainActivity : AppCompatActivity() {
         grantResults: IntArray
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if(grantResults.all{it==0}){}
+        if(grantResults.all{it==0}){
+            var vp = binding.viewPager
+            var tl = binding.tabLayout
+            vp.adapter = viewpageradapter(supportFragmentManager, lifecycle)
+
+            TabLayoutMediator(tl, vp) { tab, position ->
+                when (position) {
+                    0 -> tab.text = "Contacts"
+                    1 -> tab.text = "Gallery"
+                    2 -> tab.text = "Calendar"
+                }
+            }.attach()
+        }
         else
             requestPermissions(permArray, 1357)
 

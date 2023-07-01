@@ -15,12 +15,12 @@
         android:layout_marginStart="10dp" />
 
     <TextView
-        android:id="@+id/day_text"
+        android:id="@+id/txtday"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/calendarView"
         android:layout_marginTop="11dp"
         android:text="TextView"
-        android:textSize="30dp"
+        android:textSize="30sp"
         android:textStyle="bold" />
 </RelativeLayout>

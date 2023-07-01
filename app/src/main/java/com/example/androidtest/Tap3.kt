@@ -14,26 +14,28 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import org.w3c.dom.Text
+import com.example.androidtest.databinding.Tap3Binding
 import java.sql.Date
 
 
 class Tap3 : Fragment() {
     private lateinit var dayText: TextView
     private lateinit var calendarView: CalendarView
-
+    private lateinit var binding:Tap3Binding
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_gallery, container, false)
+        binding=Tap3Binding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        calendarView = binding.calendarView
+        dayText = binding.txtday
 
-        dayText = view.findViewById(R.id.day_text)
-        calendarView = view.findViewById(R.id.calendarView)
 
         val dateFormat: DateFormat = DateFormat() //DateFormat("yyyy년 MM월 dd일")
         val date: Date = Date(calendarView.date)
