@@ -22,6 +22,7 @@ class MainActivity : AppCompatActivity() {
             when(position){
                 0->tab.text= "Contacts"
                 1->tab.text= "Gallery"
+                2->tab.text="Memo"
             }
         }.attach()
 

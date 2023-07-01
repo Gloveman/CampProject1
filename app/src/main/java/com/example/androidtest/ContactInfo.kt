@@ -9,10 +9,8 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.androidtest.databinding.FragmentContactinfoBinding
-import org.json.JSONArray
 import android.provider.ContactsContract
 import android.database.Cursor
-import android.provider.ContactsContract.Contacts
 
 
 class ContactInfo:Fragment() {
