@@ -3,6 +3,8 @@ package com.example.androidtest
 import android.app.AlertDialog
 import android.content.Context
 import android.content.DialogInterface
+import android.content.Intent
+import android.net.Uri
 import androidx.recyclerview.widget.RecyclerView
 import android.text.Layout
 import android.view.Gravity
@@ -37,9 +39,8 @@ class listadapter(private val context: Context?):RecyclerView.Adapter<listadapte
                     .setPositiveButton("Call"
                     ) { dialog, which ->
 
-                            val tst=Toast.makeText(context, "Call finished!", Toast.LENGTH_SHORT)
-                            tst.setGravity(Gravity.BOTTOM, 0, 0)
-                            tst.show()
+                            val callIntent=Intent(Intent.ACTION_CALL);
+                           // callIntent.setData(Uri.parse("tel:"))
 
                     }
                     .setNegativeButton("Cancel",null)
