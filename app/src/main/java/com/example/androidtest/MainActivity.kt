@@ -13,7 +13,7 @@ import com.example.androidtest.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding:ActivityMainBinding
-    private val permArray= arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE,Manifest.permission.READ_CONTACTS,Manifest.permission.CALL_PHONE)
+    val permArray= arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE,Manifest.permission.READ_CONTACTS,Manifest.permission.CALL_PHONE)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding= ActivityMainBinding.inflate(layoutInflater)
@@ -21,7 +21,17 @@ class MainActivity : AppCompatActivity() {
 
                 if (permArray.all {
                         ContextCompat.checkSelfPermission(this,it) == PackageManager.PERMISSION_GRANTED }) {
+                    var vp = binding.viewPager
+                    var tl = binding.tabLayout
+                    vp.adapter = viewpageradapter(supportFragmentManager, lifecycle)
 
+                    TabLayoutMediator(tl, vp) { tab, position ->
+                        when (position) {
+                            0 -> tab.text = "Contacts"
+                            1 -> tab.text = "Gallery"
+                            2 -> tab.text = "Memo"
+                        }
+                    }.attach()
                 } else {
                     requestPermissions(permArray, 1357)
                 }
@@ -49,9 +59,7 @@ class MainActivity : AppCompatActivity() {
         grantResults: IntArray
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if(grantResults.all{it==0}){
-            onCreate(Bundle())
-        }
+        if(grantResults.all{it==0}){}
         else
             requestPermissions(permArray, 1357)
 

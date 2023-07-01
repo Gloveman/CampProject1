@@ -29,10 +29,11 @@ class ListAdapterGrid(val list: MutableList<String>,val act: Fragment,val contex
             .into(holder.itemView.findViewById(R.id.img))
         //holder.layout.findViewById<TextView>(R.id.textListTitle).text = item
 
-
+/*
         holder.layout.setOnClickListener {
             Toast.makeText(holder.layout.context, "$item Click!", Toast.LENGTH_SHORT).show()
         }
+*/
     }
 
     override fun getItemCount(): Int {

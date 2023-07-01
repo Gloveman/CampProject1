@@ -13,6 +13,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.content.ContextCompat.startActivity
 
 class listadapter(private val context: Context?):RecyclerView.Adapter<listadapter.ViewHolder>(){
     var datas= mutableListOf<ContactData>()
@@ -40,8 +41,8 @@ class listadapter(private val context: Context?):RecyclerView.Adapter<listadapte
                     ) { dialog, which ->
 
                             val callIntent=Intent(Intent.ACTION_CALL);
-                           // callIntent.setData(Uri.parse("tel:"))
-
+                        callIntent.data = Uri.parse("tel:${number.text}")
+                        context?.startActivity(callIntent,null)
                     }
                     .setNegativeButton("Cancel",null)
                     .create()
