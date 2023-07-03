@@ -1,7 +1,10 @@
 package com.example.androidtest
 
 import android.Manifest
+import android.app.AlertDialog
+import android.content.Intent
 import android.content.pm.PackageManager
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.google.android.material.tabs.TabLayoutMediator
@@ -67,4 +70,15 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    override fun onBackPressed() {
+        AlertDialog.Builder(this)
+            .setTitle("종료하시겠습니까?")
+            // .setMessage("${name.text}에게 전화를 걸까요?")
+            .setPositiveButton("네"){
+                dialog,which-> this.finish()
+            }
+            .setNegativeButton("아니요",null)
+            .create()
+            .show()
+    }
 }
