@@ -1,39 +1,50 @@
 import android.app.Dialog
 import android.content.Context
 import android.view.WindowManager
+import android.widget.Button
 import android.widget.EditText
+import com.example.androidtest.MemoData
 import com.example.androidtest.R
-import kotlinx.android.synthetic.main.custom_dialog.*
+
 
 class CustomDialog(context: Context)
 {
     private val dialog = Dialog(context)
-    private lateinit var onClickListener: OnDialogClickListener
+    var Title=""
+    var Memo=""
 
-    fun setOnClickListener(listener: OnDialogClickListener)
+
+
+    fun setMemoData(data:MemoData)
     {
-        onClickListener = listener
+        Title=data.title
+        Memo=data.memo
     }
-
+    fun getMemoData():MemoData
+    {
+        return MemoData(Title,Memo)
+    }
     fun showDialog()
     {
-        dialog.setContentView(androidx.core.R.layout.custom_dialog)
+        dialog.setContentView(R.layout.memo_background)
+        val TitleView=dialog.findViewById<EditText>(R.id.topic_edit)
+        val MemoView=dialog.findViewById<EditText>(R.id.context_edit)
+        val btnOK=dialog.findViewById<Button>(R.id.finish_button)
+        if(Title!="")
+            TitleView.setText(Title)
+        if(Memo!="")
+            MemoView.setText(Memo)
+
+        btnOK.setOnClickListener {
+            dialog.dismiss()
+        }
+        dialog.findViewById<Button>(R.id.cancel_button).setOnClickListener{dialog.dismiss()}
+
         dialog.window?.setLayout(WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT)
         dialog.setCanceledOnTouchOutside(true)
         dialog.setCancelable(true)
         dialog.show()
 
-        val edit_name = binding.nameEdit
-
-
-        dialog.cancel_button.setOnClickListener {
-            dialog.dismiss()
-        }
-
-        dialog.finish_button.setOnClickListener {
-            onClickListener.onClicked(edit_name.text.toString())
-            dialog.dismiss()
-        }
 
     }
 

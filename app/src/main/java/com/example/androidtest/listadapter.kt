@@ -12,7 +12,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-
+import com.bumptech.glide.Glide
 
 class listadapter(private val context: Context?):RecyclerView.Adapter<listadapter.ViewHolder>(){
     var datas= mutableListOf<ContactData>()
@@ -23,9 +23,12 @@ class listadapter(private val context: Context?):RecyclerView.Adapter<listadapte
     override fun getItemCount(): Int=datas.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val name = datas[position].name
-        val number = datas[position].number
         val imageResId = datas[position].imageResId
+        if (context != null) {
+            Glide.with(context)
+                .load(imageResId)
+                .into(holder.itemView.findViewById(R.id.contactimg))
+        }
         holder.bind(datas[position])
 
     }
@@ -60,7 +63,7 @@ class listadapter(private val context: Context?):RecyclerView.Adapter<listadapte
 
 data class ContactData(
     val name:String,
-    val number:String
+    val number:String,
     val imageResId:Int
 
 )

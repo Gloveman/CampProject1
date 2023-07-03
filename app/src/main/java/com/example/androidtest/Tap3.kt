@@ -1,5 +1,6 @@
 package com.example.androidtest
 
+import CustomDialog
 import android.app.AlertDialog
 import android.content.Context
 import android.graphics.Color
@@ -38,11 +39,8 @@ class Tap3 : Fragment() {
         val calendarView = binding.calendarView
         val memolistAdapter=memolistadapter(this.context)
         binding.memolist.adapter=memolistAdapter
-        val dummydata=mutableListOf(MemoData("Test1","finish homework"), MemoData("Test2","finish coding"),MemoData("Test3","playing game"))
         val curdate=Calendar.getInstance()
         datekey=curdate.get(Calendar.YEAR).toString()+(curdate.get(Calendar.MONTH)+1).toString()+curdate.get(Calendar.DAY_OF_MONTH).toString()
-        //Get memos
-        //val file=File(context?.filesDir,"memo.json")
         var fileinput: FileInputStream?=null
         try {
             fileinput= this.context?.openFileInput("test.json")
@@ -71,7 +69,6 @@ class Tap3 : Fragment() {
             memolistAdapter.datas = mapdatas.getOrDefault(datekey, mutableListOf())
              memolistAdapter.notifyDataSetChanged()
 
-            //memolistAdapter.datas = dummydata
             calendarView.setOnDateChangeListener { _, year, month, dayOfMonth ->
                 datekey = year.toString() + (month + 1).toString() + dayOfMonth.toString()
                 memolistAdapter.datas = mapdatas.getOrDefault(datekey, mutableListOf())
@@ -79,7 +76,10 @@ class Tap3 : Fragment() {
             }
             binding.btnnew.setOnClickListener {
                 //추가 창 열기
-                mapdatas.getOrPut(datekey){mutableListOf()}.add(MemoData("Testtitle"+Random().nextInt(100),"Testmemo"))
+                val dialog=CustomDialog(requireContext())
+                dialog.showDialog()
+
+                mapdatas.getOrPut(datekey){mutableListOf()}.add(MemoData(dialog.getMemoData().title,dialog.getMemoData().memo))
                 memolistAdapter.datas = mapdatas.getOrDefault(datekey, mutableListOf())
                 memolistAdapter.notifyDataSetChanged()
             }
@@ -89,7 +89,12 @@ class Tap3 : Fragment() {
                     Toast.makeText(this.context, "메모를 선택하세요", Toast.LENGTH_SHORT).show()
                 else {
                     val memlist=mapdatas[datekey]
-                    memlist?.set(memlist.indexOf(testdata),MemoData("Modified","Modified"))
+                    //testdata를 dialog로 전달
+                    val dialog=CustomDialog(requireContext())
+                    dialog.setMemoData(testdata)
+                    dialog.showDialog()
+                    //data 불러오기
+                    memlist?.set(memlist.indexOf(testdata),MemoData(dialog.getMemoData().title,dialog.getMemoData().memo))
                     //수정 창 열기
                     memolistAdapter.datas = mapdatas.getOrDefault(datekey, mutableListOf())
                     memolistAdapter.notifyDataSetChanged()

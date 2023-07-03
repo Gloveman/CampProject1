@@ -47,6 +47,11 @@ class ContactInfo:Fragment() {
                 0 ->R.drawable.icon1
                 1 ->R.drawable.icon2
                 2 ->R.drawable.icon3
+                3 ->R.drawable.icon4
+                4 ->R.drawable.icon5
+                5 ->R.drawable.icon6
+                6 ->R.drawable.icon7
+                7 ->R.drawable.icon8
                 else -> R.drawable.default_image
             }
             datas.add(ContactData(name=name,number=number,imageResId = imageResId))
