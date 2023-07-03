@@ -15,6 +15,7 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
+import kotlin.random.Random
 
 
 class ContactInfo:Fragment() {
@@ -41,7 +42,14 @@ class ContactInfo:Fragment() {
 
             val name=cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME))
             val number=cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER))
-            datas.add(ContactData(name=name,number=number))
+            val randomIndex = Random.nextInt(9)
+            val imageResId = when(randomIndex){
+                0 ->R.drawable.icon1
+                1 ->R.drawable.icon2
+                2 ->R.drawable.icon3
+                else -> R.drawable.default_image
+            }
+            datas.add(ContactData(name=name,number=number,imageResId = imageResId))
         }
         ListAdapter= listadapter(this.context)
         binding.contactlist.adapter=ListAdapter

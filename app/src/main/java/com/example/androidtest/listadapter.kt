@@ -23,6 +23,9 @@ class listadapter(private val context: Context?):RecyclerView.Adapter<listadapte
     override fun getItemCount(): Int=datas.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        val name = datas[position].name
+        val number = datas[position].number
+        val imageResId = datas[position].imageResId
         holder.bind(datas[position])
 
     }
@@ -58,4 +61,6 @@ class listadapter(private val context: Context?):RecyclerView.Adapter<listadapte
 data class ContactData(
     val name:String,
     val number:String
+    val imageResId:Int
+
 )
