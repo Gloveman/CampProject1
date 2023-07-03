@@ -36,11 +36,11 @@ class MainActivity : AppCompatActivity() {
                             }
                             1 -> {
                                 tab.text = "Gallery"
-                                tab.setIcon(R.drawable.contacticon)
+                                tab.setIcon(R.drawable.galleryicon)
                             }
                             2 -> {
                                 tab.text = "Calendar"
-                                tab.setIcon(R.drawable.contacticon)
+                                tab.setIcon(R.drawable.calendericon)
                             }
                         }
                     }.attach()
