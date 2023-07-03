@@ -12,8 +12,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import android.widget.Toast
-import androidx.core.content.ContextCompat.startActivity
+
 
 class listadapter(private val context: Context?):RecyclerView.Adapter<listadapter.ViewHolder>(){
     var datas= mutableListOf<ContactData>()
@@ -57,7 +56,6 @@ class listadapter(private val context: Context?):RecyclerView.Adapter<listadapte
 }
 
 data class ContactData(
-    //val img:Int,
     val name:String,
     val number:String
 )
