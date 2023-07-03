@@ -1,0 +1,50 @@
+ <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+     android:layout_width="match_parent"
+     android:layout_height="wrap_content"
+     android:orientation="vertical"
+     android:background="@drawable/rounded_corner_memo">
+
+            <EditText
+                android:id="@+id/topic_edit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:gravity="center"
+                android:hint="제목"
+                android:textStyle="bold" />
+
+             <EditText
+                 android:id="@+id/context_edit"
+                 android:layout_width="400dp"
+                 android:layout_height="400dp"
+                 android:layout_marginTop="10dp"
+                 android:layout_marginStart="7dp"
+                 android:layout_marginEnd="14dp"
+                 android:gravity="center"
+                 android:hint="오늘의 메모를 적어주세요!"
+                 android:background="@drawable/rounded_corner_todaymemo"/>
+
+
+     <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="end"
+                android:layout_marginEnd="20dp"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/cancel_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="완료"/>
+
+                <Button
+                    android:id="@+id/finish_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="취소"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
