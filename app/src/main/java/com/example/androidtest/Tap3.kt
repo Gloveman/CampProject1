@@ -38,12 +38,13 @@ class Tap3 : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val calendarView = binding.calendarView
         val memolistAdapter=memolistadapter(this.context)
+
         binding.memolist.adapter=memolistAdapter
         val curdate=Calendar.getInstance()
         datekey=curdate.get(Calendar.YEAR).toString()+(curdate.get(Calendar.MONTH)+1).toString()+curdate.get(Calendar.DAY_OF_MONTH).toString()
         var fileinput: FileInputStream?=null
         try {
-            fileinput= this.context?.openFileInput("test.json")
+            fileinput= this.context?.openFileInput("memodata.json")
         }
         catch(e:FileNotFoundException)
         {
@@ -77,11 +78,15 @@ class Tap3 : Fragment() {
             binding.btnnew.setOnClickListener {
                 //추가 창 열기
                 val dialog=CustomDialog(requireContext())
+
+                dialog.setonOKClickedListner { title,memo ->
+                    mapdatas.getOrPut(datekey){mutableListOf()}.add(MemoData(title,memo))
+                    memolistAdapter.datas = mapdatas.getOrDefault(datekey, mutableListOf())
+                    memolistAdapter.notifyDataSetChanged()
+                }
                 dialog.showDialog()
 
-                mapdatas.getOrPut(datekey){mutableListOf()}.add(MemoData(dialog.getMemoData().title,dialog.getMemoData().memo))
-                memolistAdapter.datas = mapdatas.getOrDefault(datekey, mutableListOf())
-                memolistAdapter.notifyDataSetChanged()
+
             }
             binding.btnchange.setOnClickListener {
                 val testdata = memolistAdapter.selecteddata
@@ -92,12 +97,14 @@ class Tap3 : Fragment() {
                     //testdata를 dialog로 전달
                     val dialog=CustomDialog(requireContext())
                     dialog.setMemoData(testdata)
+                    dialog.setonOKClickedListner { title,memo ->
+                        memlist?.set(memlist.indexOf(testdata),MemoData(title,memo))
+                        memolistAdapter.datas = mapdatas.getOrDefault(datekey, mutableListOf())
+                        memolistAdapter.lastitem.setBackgroundColor(Color.WHITE)
+                        memolistAdapter.notifyDataSetChanged()
+                    }
                     dialog.showDialog()
-                    //data 불러오기
-                    memlist?.set(memlist.indexOf(testdata),MemoData(dialog.getMemoData().title,dialog.getMemoData().memo))
-                    //수정 창 열기
-                    memolistAdapter.datas = mapdatas.getOrDefault(datekey, mutableListOf())
-                    memolistAdapter.notifyDataSetChanged()
+
                 }
 
             }
@@ -150,7 +157,7 @@ class Tap3 : Fragment() {
             JSONFile.put(item)
         }
         val JSONString=JSONFile.toString()
-        val fileoutput:FileOutputStream?=this.context?.openFileOutput("test.json",Context.MODE_PRIVATE)
+        val fileoutput:FileOutputStream?=this.context?.openFileOutput("memodata.json",Context.MODE_PRIVATE)
         fileoutput?.write(JSONString.toByteArray())
         fileoutput?.close()
     }
