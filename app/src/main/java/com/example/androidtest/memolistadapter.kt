@@ -45,6 +45,7 @@ class memolistadapter(private val context: Context?):RecyclerView.Adapter<memoli
                     if (::lastitem.isInitialized) {
                         lastitem.setBackgroundColor(Color.WHITE)
                     }
+
                     it.setBackgroundColor(Color.GRAY)
                     selecteddata = data
                     lastitem = it

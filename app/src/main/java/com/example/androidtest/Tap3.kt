@@ -1,7 +1,10 @@
 package com.example.androidtest
 
+import android.app.AlertDialog
 import android.content.Context
+import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,13 +14,13 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.androidtest.databinding.Tap3Binding
 import java.util.Calendar
+import java.util.Random
 import org.json.JSONArray
 import org.json.JSONObject
 import java.io.*
 
 
 class Tap3 : Fragment() {
-    private lateinit var daykey: String
     private lateinit var binding:Tap3Binding
     val mapdatas= mutableMapOf<String,MutableList<MemoData>>()
     var datekey=""
@@ -35,7 +38,6 @@ class Tap3 : Fragment() {
         val calendarView = binding.calendarView
         val memolistAdapter=memolistadapter(this.context)
         binding.memolist.adapter=memolistAdapter
-        binding.labeltitle.text="Before Changed"
         val dummydata=mutableListOf(MemoData("Test1","finish homework"), MemoData("Test2","finish coding"),MemoData("Test3","playing game"))
         val curdate=Calendar.getInstance()
         datekey=curdate.get(Calendar.YEAR).toString()+(curdate.get(Calendar.MONTH)+1).toString()+curdate.get(Calendar.DAY_OF_MONTH).toString()
@@ -47,7 +49,6 @@ class Tap3 : Fragment() {
         }
         catch(e:FileNotFoundException)
         {
-
         }
             if (fileinput != null) {
 
@@ -68,16 +69,18 @@ class Tap3 : Fragment() {
                 }
             }
             memolistAdapter.datas = mapdatas.getOrDefault(datekey, mutableListOf())
-
+             memolistAdapter.notifyDataSetChanged()
 
             //memolistAdapter.datas = dummydata
             calendarView.setOnDateChangeListener { _, year, month, dayOfMonth ->
                 datekey = year.toString() + (month + 1).toString() + dayOfMonth.toString()
-
+                memolistAdapter.datas = mapdatas.getOrDefault(datekey, mutableListOf())
+                memolistAdapter.notifyDataSetChanged()
             }
             binding.btnnew.setOnClickListener {
                 //추가 창 열기
-
+                mapdatas.getOrPut(datekey){mutableListOf()}.add(MemoData("Testtitle"+Random().nextInt(100),"Testmemo"))
+                memolistAdapter.datas = mapdatas.getOrDefault(datekey, mutableListOf())
                 memolistAdapter.notifyDataSetChanged()
             }
             binding.btnchange.setOnClickListener {
@@ -85,19 +88,35 @@ class Tap3 : Fragment() {
                 if (testdata == MemoData("", ""))
                     Toast.makeText(this.context, "메모를 선택하세요", Toast.LENGTH_SHORT).show()
                 else {
-
+                    val memlist=mapdatas[datekey]
+                    memlist?.set(memlist.indexOf(testdata),MemoData("Modified","Modified"))
                     //수정 창 열기
+                    memolistAdapter.datas = mapdatas.getOrDefault(datekey, mutableListOf())
+                    memolistAdapter.notifyDataSetChanged()
                 }
-                memolistAdapter.notifyDataSetChanged()
+
             }
             binding.btndel.setOnClickListener {
                 val testdata = memolistAdapter.selecteddata
                 if (testdata == MemoData("", ""))
                     Toast.makeText(this.context, "메모를 선택하세요", Toast.LENGTH_SHORT).show()
                 else {
-                    //삭제 여부 확인
+                    AlertDialog.Builder(this.context)
+                        .setTitle("정말 이 메모를 삭제합니까?")
+                        .setMessage("제목: ${testdata.title}")
+                        .setPositiveButton("네"){
+                                dialog,which->
+                            mapdatas[datekey]?.remove(testdata)
+                            memolistAdapter.selecteddata= MemoData("","")
+                            memolistAdapter.datas = mapdatas.getOrDefault(datekey, mutableListOf())
+                            memolistAdapter.lastitem.setBackgroundColor(Color.WHITE)
+                            memolistAdapter.notifyDataSetChanged()
+                        }
+                        .setNegativeButton("아니요",null)
+                        .create()
+                        .show()
                 }
-                memolistAdapter.notifyDataSetChanged()
+
             }
 
             binding.memolist.addItemDecoration(
@@ -109,9 +128,30 @@ class Tap3 : Fragment() {
 
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        //file save
+    override fun onDestroyView() {
+        super.onDestroyView()
+        val JSONFile=JSONArray()
+        mapdatas.forEach { (s, memoData) ->
+            var item=JSONObject()
+            item.put("key",s)
+            var memolist=JSONArray()
+            memoData.forEach {
+                var memoitem=JSONObject()
+                memoitem.put("title",it.title)
+                memoitem.put("memo",it.memo)
+                memolist.put(memoitem)
+            }
+            item.put("memolist",memolist)
+            JSONFile.put(item)
+        }
+        val JSONString=JSONFile.toString()
+        val fileoutput:FileOutputStream?=this.context?.openFileOutput("test.json",Context.MODE_PRIVATE)
+        fileoutput?.write(JSONString.toByteArray())
+        fileoutput?.close()
     }
+
+
+
+
 
 }
