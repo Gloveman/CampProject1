@@ -18,7 +18,7 @@ import kotlin.properties.Delegates
 class memolistadapter(private val context: Context?):RecyclerView.Adapter<memolistadapter.ViewHolder>() {
     var datas= mutableListOf<MemoData>()
     lateinit var lastitem:View
-    var selecteddata=MemoData("","")
+    var selecteddata=MemoData("NULL","NULL")
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): memolistadapter.ViewHolder {
         val view=LayoutInflater.from(context).inflate(R.layout.memoitem,parent,false)
         return ViewHolder(view)
@@ -36,10 +36,10 @@ class memolistadapter(private val context: Context?):RecyclerView.Adapter<memoli
             title.text=data.title
             memo.text=data.memo
             itemView.setOnClickListener {
-                if(::lastitem.isInitialized&& lastitem == it&&selecteddata!=MemoData("",""))
+                if(::lastitem.isInitialized&& lastitem == it&&selecteddata!=MemoData("NULL","NULL"))
                 {
                     lastitem.setBackgroundColor(Color.WHITE)
-                    selecteddata=MemoData("","")
+                    selecteddata=MemoData("NULL","NULL")
                 }
                 else {
                     if (::lastitem.isInitialized) {

@@ -90,7 +90,7 @@ class Tap3 : Fragment() {
             }
             binding.btnchange.setOnClickListener {
                 val testdata = memolistAdapter.selecteddata
-                if (testdata == MemoData("", ""))
+                if (testdata == MemoData("NULL","NULL"))
                     Toast.makeText(this.context, "메모를 선택하세요", Toast.LENGTH_SHORT).show()
                 else {
                     val memlist=mapdatas[datekey]
@@ -110,7 +110,7 @@ class Tap3 : Fragment() {
             }
             binding.btndel.setOnClickListener {
                 val testdata = memolistAdapter.selecteddata
-                if (testdata == MemoData("", ""))
+                if (testdata == MemoData("NULL","NULL"))
                     Toast.makeText(this.context, "메모를 선택하세요", Toast.LENGTH_SHORT).show()
                 else {
                     AlertDialog.Builder(this.context)
