@@ -3,12 +3,14 @@ import android.content.Context
 import android.view.WindowManager
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
 import com.example.androidtest.MemoData
 import com.example.androidtest.R
 
 
 class CustomDialog(context: Context)
 {
+    val thiscon=context
     private val dialog = Dialog(context)
     private lateinit var listener:MyListener
     var Title=""
@@ -37,8 +39,14 @@ class CustomDialog(context: Context)
             MemoView.setText(Memo)
 
         dialog.findViewById<Button>(R.id.finish_button).setOnClickListener {
-            listener.onOKClicked(TitleView.text.toString(),MemoView.text.toString())
-            dialog.dismiss()
+            if(TitleView.text.toString()!=""&&MemoView.text.toString()!="") {
+                listener.onOKClicked(TitleView.text.toString(), MemoView.text.toString())
+                dialog.dismiss()
+            }
+            else
+            {
+                Toast.makeText(thiscon,"제목과 내용을 모두 입력하세요",Toast.LENGTH_SHORT).show()
+            }
         }
         dialog.findViewById<Button>(R.id.cancel_button).setOnClickListener{dialog.dismiss()}
 

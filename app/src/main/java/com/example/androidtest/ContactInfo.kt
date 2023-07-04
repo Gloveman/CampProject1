@@ -75,7 +75,7 @@ class ContactInfo:Fragment() {
                     people.add(members.getString(j))
                 }
                 groupdata[item.getString("groupname")] = people
-                datas.add(ContactData(item.getString("groupname"),"Group", Color.GREEN))
+                datas.add(ContactData(item.getString("groupname"),"Group", R.drawable.group))
             }
         }
         val cursor=requireActivity().contentResolver.query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI,null,null,null,ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME)
@@ -121,6 +121,9 @@ class ContactInfo:Fragment() {
                         dialog.setOnClickListener {
                             groupdata.getOrPut(it) { mutableListOf() }.add(s)
                             updateGroup()
+                            datas.add(0, ContactData(it,"Group",R.drawable.group))
+                            ListAdapter.datas=datas
+                            ListAdapter.notifyDataSetChanged()
                             Toast.makeText(this.context, "추가 완료", Toast.LENGTH_SHORT).show()
                         }
                         dialog.showDialog()
