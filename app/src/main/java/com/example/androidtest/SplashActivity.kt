@@ -28,7 +28,4 @@ class SplashActivity : AppCompatActivity() {
         }, DURATION)
     }
 
-    override fun onBackPressed() {
-        super.onBackPressed()
-    }
 }
