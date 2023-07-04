@@ -74,7 +74,7 @@ class MainActivity : AppCompatActivity() {
             var vp = binding.viewPager
             var tl = binding.tabLayout
             vp.adapter = viewpageradapter(supportFragmentManager, lifecycle)
-            window.statusBarColor=Color.parseColor("FF1A2028")
+            window.statusBarColor= 0xff1A2028.toInt()
             TabLayoutMediator(tl, vp) { tab, position ->
                 when (position) {
                     0 -> {
