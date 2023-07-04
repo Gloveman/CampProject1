@@ -10,7 +10,7 @@ import kotlin.time.Duration
 
 class SplashActivity : AppCompatActivity() {
 
-    private val DURATION: Long = 3000
+    private val DURATION: Long = 1500
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

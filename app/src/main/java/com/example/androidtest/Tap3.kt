@@ -116,15 +116,15 @@ class Tap3 : Fragment() {
                     AlertDialog.Builder(this.context)
                         .setTitle("정말 이 메모를 삭제합니까?")
                         .setMessage("제목: ${testdata.title}")
-                        .setPositiveButton("네"){
+                        .setNegativeButton("네"){
                                 dialog,which->
                             mapdatas[datekey]?.remove(testdata)
-                            memolistAdapter.selecteddata= MemoData("","")
+                            memolistAdapter.selecteddata= MemoData("NULL","NULL")
                             memolistAdapter.datas = mapdatas.getOrDefault(datekey, mutableListOf())
                             memolistAdapter.lastitem.setBackgroundColor(Color.WHITE)
                             memolistAdapter.notifyDataSetChanged()
                         }
-                        .setNegativeButton("아니요",null)
+                        .setPositiveButton("아니요",null)
                         .create()
                         .show()
                 }

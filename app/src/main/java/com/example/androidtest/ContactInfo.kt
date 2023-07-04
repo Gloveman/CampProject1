@@ -78,6 +78,11 @@ class ContactInfo:Fragment() {
                 datas.add(ContactData(item.getString("groupname"),"Group", R.drawable.group))
             }
         }
+        else{
+            groupdata["즐겨찾기"]= mutableListOf()
+            datas.add(ContactData(" 즐겨찾기","Group",R.drawable.group))
+            updateGroup()
+        }
         val cursor=requireActivity().contentResolver.query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI,null,null,null,ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME)
         while(cursor!!.moveToNext()){
 
@@ -121,10 +126,12 @@ class ContactInfo:Fragment() {
                         dialog.setOnClickListener {
                             groupdata.getOrPut(it) { mutableListOf() }.add(s)
                             updateGroup()
-                            datas.add(0, ContactData(it,"Group",R.drawable.group))
+                            datas.add(1, ContactData(it,"Group",R.drawable.group))
                             ListAdapter.datas=datas
                             ListAdapter.notifyDataSetChanged()
                             Toast.makeText(this.context, "추가 완료", Toast.LENGTH_SHORT).show()
+                            updateGroup()
+
                         }
                         dialog.showDialog()
                     }
@@ -161,7 +168,7 @@ class ContactInfo:Fragment() {
     }
     override fun onDestroyView() {
         super.onDestroyView()
-        updateGroup()
+
     }
     fun updateGroup()
     {

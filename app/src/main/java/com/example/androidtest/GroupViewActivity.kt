@@ -91,7 +91,7 @@ class GroupViewActivity: AppCompatActivity() {
             AlertDialog.Builder(this)
                 .setTitle("정말로 삭제합니까?")
                 .setMessage("이름: ${it.name}")
-                .setPositiveButton("네"){
+                .setNegativeButton("네"){
                         dialog,which->
                     GroupViewAdapter.members.remove(it)
                     groupdata[groupname]?.remove(it.name)
@@ -99,7 +99,7 @@ class GroupViewActivity: AppCompatActivity() {
 
 
                 }
-                .setNegativeButton("아니요",null)
+                .setPositiveButton("아니요",null)
                 .create()
                 .show()
 

@@ -48,7 +48,6 @@ class Gallery : Fragment() {
     }
     override fun onDestroyView() {
         super.onDestroyView()
-        Toast.makeText(this.context,"onDestoryView 호출",Toast.LENGTH_SHORT).show()
     }
 
 }

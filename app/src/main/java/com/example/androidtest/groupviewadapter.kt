@@ -48,7 +48,6 @@ class groupviewadapter(val context: Context?):RecyclerView.Adapter<groupviewadap
                             }
                             2->{
                                 //fragment에서 처리
-
                                 listener.DeleteHandler(person)
                             }
                         }
