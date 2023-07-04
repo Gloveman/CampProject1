@@ -21,6 +21,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".ImageViewActivity"/>
+        <activity android:name=".GroupViewActivity"/>
     </application>
     <uses-permission android:name="android.permission.READ_CONTACTS" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />

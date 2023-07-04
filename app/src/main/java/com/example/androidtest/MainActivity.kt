@@ -69,9 +69,19 @@ class MainActivity : AppCompatActivity() {
 
             TabLayoutMediator(tl, vp) { tab, position ->
                 when (position) {
-                    0 -> tab.text = "Contacts"
-                    1 -> tab.text = "Gallery"
-                    2 -> tab.text = "Calendar"
+                    0 -> {
+                        tab.text = "Contacts"
+                        tab.setIcon(R.drawable.contacticon)
+
+                    }
+                    1 -> {
+                        tab.text = "Gallery"
+                        tab.setIcon(R.drawable.galleryicon)
+                    }
+                    2 -> {
+                        tab.text = "Calendar"
+                        tab.setIcon(R.drawable.calendericon)
+                    }
                 }
             }.attach()
         }

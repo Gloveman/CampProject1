@@ -1,14 +1,19 @@
 package com.example.androidtest
 
+import android.content.Context
 import android.os.Bundle
 import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.recyclerview02.ListAdapterGrid
+import org.json.JSONArray
+import org.json.JSONObject
+import java.io.FileOutputStream
 
 
 class Gallery : Fragment() {
@@ -39,6 +44,10 @@ class Gallery : Fragment() {
             adapter = listAdapter
         }
         listAdapter.notifyDataSetChanged()
+    }
+    override fun onDestroyView() {
+        super.onDestroyView()
+        Toast.makeText(this.context,"onDestoryView 호출",Toast.LENGTH_SHORT).show()
     }
 
 }

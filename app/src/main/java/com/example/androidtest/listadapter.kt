@@ -2,12 +2,9 @@ package com.example.androidtest
 
 import android.app.AlertDialog
 import android.content.Context
-import android.content.DialogInterface
 import android.content.Intent
 import android.net.Uri
 import androidx.recyclerview.widget.RecyclerView
-import android.text.Layout
-import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,6 +13,7 @@ import com.bumptech.glide.Glide
 
 class listadapter(private val context: Context?):RecyclerView.Adapter<listadapter.ViewHolder>(){
     var datas= mutableListOf<ContactData>()
+    private lateinit var listener:ContactListener
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view=LayoutInflater.from(context).inflate(R.layout.viewitem,parent,false)
         return ViewHolder(view)
@@ -29,7 +27,10 @@ class listadapter(private val context: Context?):RecyclerView.Adapter<listadapte
                 .load(imageResId)
                 .into(holder.itemView.findViewById(R.id.contactimg))
         }
-        holder.bind(datas[position])
+        if(datas[position].number=="Group")
+            holder.Groupbind(datas[position])
+        else
+            holder.bind(datas[position])
 
     }
     inner class ViewHolder(view: View):RecyclerView.ViewHolder(view){
@@ -41,29 +42,58 @@ class listadapter(private val context: Context?):RecyclerView.Adapter<listadapte
             itemView.setOnClickListener{
                 AlertDialog.Builder(context)
                     .setTitle("무엇을 할까요?")
-                   // .setMessage("${name.text}에게 전화를 걸까요?")
-                    .setItems(arrayOf("전화 걸기","문자 보내기")){ dialog, which ->
-                        if(which==0) {
-                            val callIntent = Intent(Intent.ACTION_CALL);
-                            callIntent.data = Uri.parse("tel:${number.text}")
-                            context?.startActivity(callIntent, null)
+                    .setItems(arrayOf("전화 걸기","문자 보내기","그룹에 추가하기")){ dialog, which ->
+                        when(which)
+                        {
+                            0->{
+                                val callIntent = Intent(Intent.ACTION_CALL);
+                                callIntent.data = Uri.parse("tel:${number.text}")
+                                context?.startActivity(callIntent, null)
+                            }
+                            1->{
+                                val messageIntent=Intent(Intent.ACTION_VIEW)
+                                messageIntent.data=Uri.parse("smsto:${number.text}")
+                                context?.startActivity(messageIntent,null)
+                            }
+                            2->{
+                                //fragment에서 처리
+                                listener.AddtoGroup(data.name)
+                            }
                         }
-                        else{
-                            val messageIntent=Intent(Intent.ACTION_VIEW)
-                            messageIntent.data=Uri.parse("smsto:${number.text}")
-                            context?.startActivity(messageIntent,null)
-                        }
+
                     }
                     .create()
                     .show()
             }
         }
+        fun Groupbind(data:ContactData){
+            name.text=data.name
+            number.text=data.number
+            itemView.setOnClickListener{
+                //Group 창 열기
+                //Group 이름을 인수로 전달
+            }
+        }
     }
+
+    fun setAddtoGroupListener(func:(String)->Unit) {
+        this.listener = object : ContactListener {
+
+            override fun AddtoGroup(person: String) {
+                func(person)
+            }
+        }
+    }
+
 }
 
-data class ContactData(
-    val name:String,
-    val number:String,
-    val imageResId:Int
+    interface  ContactListener{
+        fun AddtoGroup(person:String)
+    }
 
-)
+    data class ContactData(
+        val name:String,
+        val number:String,
+        val imageResId:Int
+
+    )
