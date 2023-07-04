@@ -22,6 +22,7 @@ import android.text.TextWatcher
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.core.widget.addTextChangedListener
+import groupCustomDialog
 import org.json.JSONArray
 import org.json.JSONObject
 import java.io.FileInputStream
@@ -116,7 +117,13 @@ class ContactInfo:Fragment() {
                         Toast.makeText(this.context, "추가 완료", Toast.LENGTH_SHORT).show()
                     }
                     else{
-                        //추가 dialog
+                        val dialog=groupCustomDialog(requireContext())
+                        dialog.setOnClickListener {
+                            groupdata.getOrPut(it) { mutableListOf() }.add(s)
+                            updateGroup()
+                            Toast.makeText(this.context, "추가 완료", Toast.LENGTH_SHORT).show()
+                        }
+                        dialog.showDialog()
                     }
 
                 }

@@ -7,12 +7,14 @@ import android.content.pm.PackageManager
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.SystemClock.sleep
 import com.google.android.material.tabs.TabLayoutMediator
 import android.view.View
+import android.widget.ImageView
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.example.androidtest.databinding.ActivityMainBinding
-
+import com.bumptech.glide.Glide
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding:ActivityMainBinding
@@ -20,7 +22,6 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding= ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
 
                 if (permArray.all {
                         ContextCompat.checkSelfPermission(this,it) == PackageManager.PERMISSION_GRANTED }) {
@@ -44,10 +45,14 @@ class MainActivity : AppCompatActivity() {
                                 tab.setIcon(R.drawable.calendericon)
                             }
                         }
+
                     }.attach()
+
+                    setContentView(binding.root)
                 } else {
                     requestPermissions(permArray, 1357)
                 }
+
 
     }
 
@@ -84,6 +89,9 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
             }.attach()
+            setContentView(R.layout.activity_start)
+            sleep(3000)
+            setContentView(binding.root)
         }
         else
             requestPermissions(permArray, 1357)

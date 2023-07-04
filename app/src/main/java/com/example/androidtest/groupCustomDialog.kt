@@ -9,8 +9,12 @@ class groupCustomDialog(context: Context) {
     private val dialog = Dialog(context)
     private lateinit var onClickListener: OnDialogClickListener
 
-    fun setOnClickListener(listener: OnDialogClickListener) {
-        onClickListener = listener
+    fun setOnClickListener(listener:(String)->Unit) {
+        this.onClickListener=object:OnDialogClickListener{
+            override fun onClicked(groupName: String) {
+                listener(groupName)
+            }
+        }
     }
 
     fun showDialog() {
