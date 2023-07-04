@@ -14,7 +14,7 @@ import com.bumptech.glide.Glide
 import android.content.Intent
 import android.net.Uri
 
-class imageViewer(val imgpath:String):Fragment() {
+class imageViewer(val imgpath:String, val bmiResult: String):Fragment() {
     private lateinit var binding:FragmentViewimgBinding
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -37,11 +37,13 @@ class imageViewer(val imgpath:String):Fragment() {
                 shareImage(imgpath)
             }
         }
-    private fun shareImage(imagePath: String) {
+    private fun shareImage(imagePath: String, bmiResult: String) {
         val imageUri = Uri.parse(imagePath)
         val shareIntent = Intent(Intent.ACTION_SEND)
         shareIntent.type = "image/*"
         shareIntent.putExtra(Intent.EXTRA_STREAM, imageUri)
+        shareIntent.putExtra(Intent.EXTRA_TEXT, "BMI 결과: $bmiResult")
+        shareIntent.setPackage("com.kakao.talk")
         startActivity(Intent.createChooser(shareIntent, "이미지 공유"))
     }
 }
