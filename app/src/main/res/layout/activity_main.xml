@@ -7,13 +7,13 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
+
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
-        app:tabRippleColor="@color/tab_selected_ripple_color"/>
-
+        app:tabSelectedTextColor="@color/tab_selected_ripple_color" />
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/viewPager"
