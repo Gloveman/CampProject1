@@ -17,7 +17,7 @@ class SplashActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
          setContentView(R.layout.activity_splash)
 
-        var loadingImage = findViewById(R.id.animationView) as LottieAnimationView
+       val loadingImage = findViewById<LottieAnimationView>(R.id.animationView)
 
         // 애니메이션 시작
         loadingImage.playAnimation()

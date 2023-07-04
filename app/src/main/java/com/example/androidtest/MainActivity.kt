@@ -91,7 +91,6 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
             }.attach()
-            setContentView(R.layout.activity_start)
             setContentView(binding.root)
         }
         else
