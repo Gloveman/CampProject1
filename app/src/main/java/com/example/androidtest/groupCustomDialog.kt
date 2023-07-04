@@ -19,9 +19,16 @@ class groupCustomDialog(context: Context) {
 
     fun showDialog() {
         dialog.setContentView(R.layout.group_dialog)
-        dialog.window?.setLayout(WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT)
         dialog.setCanceledOnTouchOutside(true)
         dialog.setCancelable(true)
+
+        val window = dialog.window
+        val layoutParams = WindowManager.LayoutParams().apply {
+            copyFrom(window?.attributes)
+            width = 1000
+            height = 800
+        }
+        window?.attributes = layoutParams
 
         val groupEdit = dialog.findViewById<EditText>(R.id.group_edit)
         val cancelButton = dialog.findViewById<Button>(R.id.cancel_button)
