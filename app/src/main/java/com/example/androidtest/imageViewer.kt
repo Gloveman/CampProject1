@@ -34,10 +34,10 @@ class imageViewer(val imgpath:String, val bmiResult: String):Fragment() {
             .into(binding.imgview)
 
             binding.shareButton.setOnClickListener {
-                shareImage(imgpath)
+                shareImageWithText(imgpath, bmiResult)
             }
         }
-    private fun shareImage(imagePath: String, bmiResult: String) {
+    private fun shareImageWithText(imagePath: String, bmiResult: String) {
         val imageUri = Uri.parse(imagePath)
         val shareIntent = Intent(Intent.ACTION_SEND)
         shareIntent.type = "image/*"
