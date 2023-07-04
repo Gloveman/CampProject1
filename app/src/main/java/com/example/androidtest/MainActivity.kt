@@ -5,6 +5,7 @@ import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Color
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -30,7 +31,7 @@ class MainActivity : AppCompatActivity() {
                     var vp = binding.viewPager
                     var tl = binding.tabLayout
                     vp.adapter = viewpageradapter(supportFragmentManager, lifecycle)
-
+                   window.statusBarColor= 0xff1A2028.toInt()
                     TabLayoutMediator(tl, vp) { tab, position ->
                         when (position) {
                             0 -> {
@@ -73,7 +74,7 @@ class MainActivity : AppCompatActivity() {
             var vp = binding.viewPager
             var tl = binding.tabLayout
             vp.adapter = viewpageradapter(supportFragmentManager, lifecycle)
-
+            window.statusBarColor=Color.parseColor("FF1A2028")
             TabLayoutMediator(tl, vp) { tab, position ->
                 when (position) {
                     0 -> {

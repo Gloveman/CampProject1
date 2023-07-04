@@ -13,6 +13,7 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.constraintlayout.widget.Group
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.androidtest.databinding.ActivityContactgroupBinding
@@ -33,7 +34,7 @@ class GroupViewActivity: AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding= ActivityContactgroupBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+        window.statusBarColor= Color.WHITE
         groupname= intent.getStringExtra("groupname").toString()
         Log.d("NAME",groupname)
         var fileinput: FileInputStream?=null
@@ -84,6 +85,7 @@ class GroupViewActivity: AppCompatActivity() {
             }
 
         }
+        binding.btndeletegroup.isVisible = groupname != "즐겨찾기"
         binding.txtgroupname.text=groupname
         GroupViewAdapter.notifyDataSetChanged()
 
@@ -104,10 +106,35 @@ class GroupViewActivity: AppCompatActivity() {
                 .show()
 
         }
-        binding.grouplist.addItemDecoration(
-            DividerItemDecoration(this,
-                LinearLayoutManager.VERTICAL)
-        )
+        binding.btndeletegroup.setOnClickListener {
+            AlertDialog.Builder(this)
+                .setTitle("정말로 삭제합니까?")
+                .setNegativeButton("네"){
+                        dialog,which->
+                    groupdata.remove(groupname)
+
+                    val JSONFile= JSONArray()
+                    groupdata.forEach { (s, strings) ->
+                        var item= JSONObject()
+                        item.put("groupname",s)
+                        var people=JSONArray()
+                        strings.forEach {
+                            people.put(it)
+                        }
+                        item.put("member",people)
+                        JSONFile.put(item)
+                    }
+                    val JSONString=JSONFile.toString()
+                    val fileoutput: FileOutputStream?=this.openFileOutput("contactgroup.json", Context.MODE_PRIVATE)
+                    fileoutput?.write(JSONString.toByteArray())
+                    fileoutput?.close()
+                    finish()
+                }
+                .setPositiveButton("아니요",null)
+                .create()
+                .show()
+        }
+
 
     }
 
@@ -116,7 +143,6 @@ class GroupViewActivity: AppCompatActivity() {
 
         finish()
     }
-
     override fun onDestroy() {
         super.onDestroy()
         val JSONFile= JSONArray()

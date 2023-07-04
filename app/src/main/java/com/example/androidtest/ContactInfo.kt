@@ -35,6 +35,7 @@ class ContactInfo:Fragment() {
     private lateinit var binding:FragmentContactinfoBinding
     lateinit var ListAdapter:listadapter
     val datas= mutableListOf<ContactData>()
+    var contactData= mutableListOf<ContactData>()
     val groupdata= mutableMapOf<String,MutableList<String>>()
     var query=""
     override fun onCreateView(
@@ -75,6 +76,7 @@ class ContactInfo:Fragment() {
                     people.add(members.getString(j))
                 }
                 groupdata[item.getString("groupname")] = people
+
                 datas.add(ContactData(item.getString("groupname"),"Group", R.drawable.group))
             }
         }
@@ -100,6 +102,7 @@ class ContactInfo:Fragment() {
                 7 ->R.drawable.icon8
                 else -> R.drawable.default_image
             }
+            contactData.add(ContactData(name=name,number=number,imageResId = imageResId))
             datas.add(ContactData(name=name,number=number,imageResId = imageResId))
         }
         ListAdapter= listadapter(this.context)
@@ -117,9 +120,15 @@ class ContactInfo:Fragment() {
                 .setTitle("그룹 선택")
                 .setItems(grouplist){ dialog, which ->
                     if(which!=temp.size-1) {
-                        groupdata.getOrPut(temp[which]) { mutableListOf() }.add(s)
-                        updateGroup()
-                        Toast.makeText(this.context, "추가 완료", Toast.LENGTH_SHORT).show()
+                        if(groupdata.getOrPut(temp[which]){ mutableListOf()}.contains(s))
+                        {
+                            Toast.makeText(this.context, "해당 그룹에 이미 존재합니다", Toast.LENGTH_SHORT).show()
+                        }
+                        else {
+                            groupdata.getOrPut(temp[which]) { mutableListOf() }.add(s)
+                            updateGroup()
+                            Toast.makeText(this.context, "추가 완료", Toast.LENGTH_SHORT).show()
+                        }
                     }
                     else{
                         val dialog=groupCustomDialog(requireContext())
@@ -164,11 +173,51 @@ class ContactInfo:Fragment() {
             }
         })
 
-        binding.contactlist.addItemDecoration(DividerItemDecoration(this.context,LinearLayoutManager.VERTICAL))
     }
     override fun onDestroyView() {
         super.onDestroyView()
 
+    }
+
+    @SuppressLint("Range")
+    override fun onResume() {
+        super.onResume()
+        datas.clear()
+        var fileinput: FileInputStream?=null
+        try {
+            fileinput= this.context?.openFileInput("contactgroup.json")
+        }
+        catch(e: FileNotFoundException)
+        {
+        }
+        if (fileinput != null) {
+
+            val buffer = ByteArray(fileinput!!.available())
+            fileinput.read(buffer)
+            fileinput.close()
+
+            val dataArray = JSONArray(String(buffer, Charsets.UTF_8))
+            for (i in 0 until dataArray.length()) {
+                val item = dataArray.getJSONObject(i)
+                val people = mutableListOf<String>()
+                val members=item.getJSONArray("member")
+                for(j in 0 until members.length()) {
+                    people.add(members.getString(j))
+                }
+                groupdata[item.getString("groupname")] = people
+                datas.add(ContactData(item.getString("groupname"),"Group", R.drawable.group))
+            }
+        }
+        else{
+            groupdata["즐겨찾기"]= mutableListOf()
+            datas.add(ContactData(" 즐겨찾기","Group",R.drawable.group))
+            updateGroup()
+        }
+        contactData.forEach {
+            datas.add(it)
+        }
+        ListAdapter.datas=datas
+        ListAdapter.notifyDataSetChanged()
     }
     fun updateGroup()
     {

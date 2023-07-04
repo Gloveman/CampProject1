@@ -3,6 +3,7 @@ package com.example.androidtest
 import android.Manifest
 import android.annotation.SuppressLint
 import android.content.pm.PackageManager
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
@@ -28,6 +29,7 @@ class ImageViewActivity:AppCompatActivity() {
         binding= ActivityImageviewerBinding.inflate(layoutInflater)
         binding.imageviewPager.adapter=imgviewpageradapter(imgs,supportFragmentManager, lifecycle)
         binding.imageviewPager.currentItem = pos
+        window.statusBarColor= Color.WHITE
         setContentView(binding.root)
     }
     override fun onResume() {

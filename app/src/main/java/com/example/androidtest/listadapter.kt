@@ -14,6 +14,7 @@ import com.bumptech.glide.Glide
 
 class listadapter(private val context: Context?):RecyclerView.Adapter<listadapter.ViewHolder>(){
     var datas= mutableListOf<ContactData>()
+    var shouldupdate=false
     private lateinit var listener:ContactListener
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view=LayoutInflater.from(context).inflate(R.layout.viewitem,parent,false)
