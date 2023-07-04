@@ -11,6 +11,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.androidtest.databinding.FragmentViewimgBinding
 import com.bumptech.glide.Glide
+import android.content.Intent
+import android.net.Uri
 
 class imageViewer(val imgpath:String):Fragment() {
     private lateinit var binding:FragmentViewimgBinding
@@ -30,5 +32,17 @@ class imageViewer(val imgpath:String):Fragment() {
         Glide.with(this)
             .load(imgpath)
             .into(binding.imgview)
+
+            binding.shareButton.setOnClickListener {
+                shareImage(imgpath)
+            }
+        }
+    private fun shareImage(imagePath: String) {
+        val imageUri = Uri.parse(imagePath)
+        val shareIntent = Intent(Intent.ACTION_SEND)
+        shareIntent.type = "image/*"
+        shareIntent.putExtra(Intent.EXTRA_STREAM, imageUri)
+        startActivity(Intent.createChooser(shareIntent, "이미지 공유"))
     }
 }
+
