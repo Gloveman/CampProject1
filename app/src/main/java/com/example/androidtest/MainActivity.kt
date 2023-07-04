@@ -33,6 +33,7 @@ class MainActivity : AppCompatActivity() {
                             0 -> {
                                 tab.text = "Contacts"
                                 tab.setIcon(R.drawable.contacticon)
+
                             }
                             1 -> {
                                 tab.text = "Gallery"
