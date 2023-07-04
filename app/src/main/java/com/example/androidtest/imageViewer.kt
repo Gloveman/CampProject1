@@ -13,8 +13,11 @@ import com.example.androidtest.databinding.FragmentViewimgBinding
 import com.bumptech.glide.Glide
 import android.content.Intent
 import android.net.Uri
+import android.provider.MediaStore
+import android.util.Log
+import java.io.File
 
-class imageViewer(val imgpath:String, val bmiResult: String):Fragment() {
+class imageViewer(val imgdata:ViewImg):Fragment() {
     private lateinit var binding:FragmentViewimgBinding
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -30,21 +33,23 @@ class imageViewer(val imgpath:String, val bmiResult: String):Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val binding= FragmentViewimgBinding.bind(view)
         Glide.with(this)
-            .load(imgpath)
+            .load(imgdata.path)
             .into(binding.imgview)
 
             binding.shareButton.setOnClickListener {
-                shareImageWithText(imgpath, bmiResult)
+                shareImageWithText(imgdata.id)
             }
         }
-    private fun shareImageWithText(imagePath: String, bmiResult: String) {
-        val imageUri = Uri.parse(imagePath)
+    private fun shareImageWithText(imageid: Int) {
+        val imageUri = Uri.withAppendedPath(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+            imageid.toString()
+        )
         val shareIntent = Intent(Intent.ACTION_SEND)
         shareIntent.type = "image/*"
         shareIntent.putExtra(Intent.EXTRA_STREAM, imageUri)
-        shareIntent.putExtra(Intent.EXTRA_TEXT, "BMI 결과: $bmiResult")
-        shareIntent.setPackage("com.kakao.talk")
         startActivity(Intent.createChooser(shareIntent, "이미지 공유"))
+
+
     }
 }
 

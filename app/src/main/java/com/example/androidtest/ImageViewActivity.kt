@@ -1,6 +1,7 @@
 package com.example.androidtest
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -13,14 +14,15 @@ import kotlin.properties.Delegates
 
 class ImageViewActivity:AppCompatActivity() {
     private lateinit var binding: ActivityImageviewerBinding
-    val imgs= mutableListOf<String>()
+    val imgs= mutableListOf<ViewImg>()
     private var pos=0
+    @SuppressLint("Range")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val cursor= contentResolver.query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,null,null,null,null)
         val curidx=cursor!!.getColumnIndexOrThrow(MediaStore.MediaColumns.DATA)
         while(cursor!!.moveToNext()){
-            imgs.add(cursor.getString(curidx))
+            imgs.add(ViewImg(cursor.getString(curidx),cursor.getInt(cursor!!.getColumnIndex(MediaStore.MediaColumns._ID))))
         }
         pos=intent.getIntExtra("position",0)
         binding= ActivityImageviewerBinding.inflate(layoutInflater)
@@ -33,3 +35,8 @@ class ImageViewActivity:AppCompatActivity() {
 
     }
 }
+
+data class ViewImg(
+    val path:String,
+    val id:Int
+)

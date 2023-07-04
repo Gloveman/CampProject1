@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.recyclerview02.ListAdapterGrid
+import com.example.androidtest.databinding.FragmentGalleryBinding
 import org.json.JSONArray
 import org.json.JSONObject
 import java.io.FileOutputStream

@@ -5,7 +5,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.fragment.app.Fragment
 
-class imgviewpageradapter(val list: MutableList<String>,fragmentManager: FragmentManager, lifecycle: Lifecycle):
+class imgviewpageradapter(val list: MutableList<ViewImg>,fragmentManager: FragmentManager, lifecycle: Lifecycle):
     FragmentStateAdapter(fragmentManager,lifecycle) {
     override fun getItemCount(): Int {
         return list.size

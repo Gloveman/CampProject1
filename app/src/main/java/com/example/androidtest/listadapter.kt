@@ -70,8 +70,9 @@ class listadapter(private val context: Context?):RecyclerView.Adapter<listadapte
             name.text=data.name
             number.text=data.number
             itemView.setOnClickListener{
-                //Group 창 열기
-                //Group 이름을 인수로 전달
+                val groupview=Intent(context,GroupViewActivity::class.java)
+                groupview.putExtra("groupname",data.name)
+                context?.startActivity(groupview)
             }
         }
     }
