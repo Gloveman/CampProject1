@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 
 class groupviewadapter(val context: Context?):RecyclerView.Adapter<groupviewadapter.ViewHolder>() {
     var members= mutableListOf<ContactData>()
@@ -22,7 +23,13 @@ class groupviewadapter(val context: Context?):RecyclerView.Adapter<groupviewadap
     override fun getItemCount()=members.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        if(context!=null){
+            Glide.with(context)
+                .load(members[position].imageResId)
+                .into(holder.itemView.findViewById(R.id.contactimg))
+        }
         holder.bind(members[position])
+
     }
     inner class ViewHolder(view: View):RecyclerView.ViewHolder(view) {
         val name: TextView =itemView.findViewById(R.id.txtname)
