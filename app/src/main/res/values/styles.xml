@@ -3,6 +3,10 @@
     <style name="Splash" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">@color/white</item>
         <item name="colorPrimaryDark">@color/white</item>
+    </style>
+    <style name="tabtext" parent="TextAppearance.Design.CollapsingToolbar.Expanded">
+            <item name="android:fontFamily">@font/myfont</item>
+        <item name="android:textSize"> 16sp</item>
 
     </style>
 </resources>
