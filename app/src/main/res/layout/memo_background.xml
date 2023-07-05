@@ -4,9 +4,7 @@
      android:orientation="vertical"
      android:background="@drawable/rounded_corner_memo"
      xmlns:app="http://schemas.android.com/apk/res-auto"
-     xmlns:tools="http://schemas.android.com/tools"
-
-     >
+     xmlns:tools="http://schemas.android.com/tools">
             <EditText
                 android:id="@+id/topic_edit"
                 android:layout_width="match_parent"
@@ -47,11 +45,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="20dp"
-                    android:text="완료"/>
+                    android:background="@drawable/rounded_button_background"
+                    android:text="확인"/>
                 <Button
                     android:id="@+id/cancel_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:background="@drawable/rounded_button_background"
                     android:layout_marginLeft="20dp"
                     android:text="취소"/>
 
