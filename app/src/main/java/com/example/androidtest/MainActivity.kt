@@ -104,23 +104,24 @@ class MainActivity : AppCompatActivity() {
             var vp = binding.viewPager
             var tl = binding.tabLayout
             vp.adapter = viewpageradapter(supportFragmentManager, lifecycle)
-
+            setContentView(binding.root)
             window.statusBarColor= 0xffffff
             TabLayoutMediator(tl, vp) { tab, position ->
                 when (position) {
                     0 -> {
                         tab.text = "Contacts"
                         tab.setIcon(R.drawable.contacticon)
+                        tab.id=0
                         tab.tabLabelVisibility=TabLayout.TAB_LABEL_VISIBILITY_UNLABELED
                     }
                     1 -> {
                         tab.text = "Gallery"
-                        tab.setIcon(R.drawable.galleryicon)
+                        tab.id=1
                         tab.tabLabelVisibility=TabLayout.TAB_LABEL_VISIBILITY_UNLABELED
                     }
                     2 -> {
                         tab.text = "Calendar"
-                        tab.setIcon(R.drawable.calendericon)
+                        tab.id=2
                         tab.tabLabelVisibility=TabLayout.TAB_LABEL_VISIBILITY_UNLABELED
                     }
                 }
@@ -145,7 +146,7 @@ class MainActivity : AppCompatActivity() {
                 }
 
             })
-            setContentView(binding.root)
+
         }
         else
             requestPermissions(permArray, 1357)
