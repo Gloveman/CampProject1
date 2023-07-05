@@ -2,16 +2,27 @@
 
 <img src = "https://github.com/Gloveman/CampProject1/assets/135544903/e45b5365-059a-44de-b029-8a48dd86d7eb" height ="400" weight = "400"/>
 
-## 🖥️ 프로젝트 소개
+## 🥨 프로젝트 소개
 3개의 Tab을 가진 Android application
 
-## 🧑🏻‍🚀팀원
-이창우, 조세연
+## 🧑🏻‍🚀 팀원
+포항공과대학교 컴퓨터공학과 20학번 이창우
+
+숙명여자대학교 컴퓨터과학전공 21학번 조세연
+
+## 💻 개발환경
+- OS: Android
+- Language: Kotlin
+- IDE: Android Studio
+- Target Device: Galaxy Note 10+
+
+## 📁 어플리케이션 소개
 
 # Splash screen
 ![splash_AdobeExpress](https://github.com/Gloveman/CampProject1/assets/135544903/66eb195b-e91c-4ed3-8980-72eb86474a97)
 
 lottieanimation을 startup activity에서 실행하고 일정 시간 후에 mainactivity로 넘어가도록 했다.
+
 # Tab1_contact
 
 |scroll|action|group|
