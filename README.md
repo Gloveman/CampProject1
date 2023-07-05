@@ -14,17 +14,17 @@
 
 |scroll|action|group|
 |------|------|------|
-|<img src="https://github.com/Gloveman/CampProject1/assets/135544903/3405aeab-903b-4a1c-b57b-03c7708c8b74" width="200" height="400"/>|<img src="https://github.com/Gloveman/CampProject1/assets/135544903/5e662e7b-3e48-4870-8276-99deb9cfda4d" width="200" height="400"/>|<img src="https://github.com/Gloveman/CampProject1/assets/135544903/5681fb53-e172-4a6e-b253-9e4095d097d0" width="200" height="400"/>
+|![tab1_scroll](https://github.com/Gloveman/CampProject1/assets/135544903/258962f8-d640-4417-b799-80ed2181efb1)|![tab1_action](https://github.com/Gloveman/CampProject1/assets/135544903/be5cac70-7851-4175-b1ed-051ac22306e4)|![tab1_group](https://github.com/Gloveman/CampProject1/assets/135544903/687a7f6c-3a70-4813-b29b-5909e94a3dfd)
 
 
 
 # Tab2_gallery
 |scroll|share|
 |------|------|
-|![tab2_galleryscroll](https://github.com/Gloveman/CampProject1/assets/135544903/b392a0ea-f4fc-4bb8-abe7-8d620b437a07)|![tab2_share](https://github.com/Gloveman/CampProject1/assets/135544903/a4657c13-46f2-46c2-a921-eebcbc5aeb47)|
+![tab2_scroll](https://github.com/Gloveman/CampProject1/assets/135544903/b82532cb-f311-41e4-a6bf-7d04d6ba2865)|![tab2_share](https://github.com/Gloveman/CampProject1/assets/135544903/74660b38-09ab-4c7b-981d-2ff67281c451)|
 
 
 # Tab3_calender & memo
 |scroll|add|edit|
 |------|------|------|
-|![tab3_memoscroll](https://github.com/Gloveman/CampProject1/assets/135544903/6981dae3-d897-4de0-8243-2b284bc2cce5)|![tab3_memoadd](https://github.com/Gloveman/CampProject1/assets/135544903/3a045dc5-9c71-4cbc-97c4-fb5601934284)|![tab3_edit](https://github.com/Gloveman/CampProject1/assets/135544903/24980576-fce9-4403-b8c0-c4f135ecfc05)|
+|![tab3_scroll](https://github.com/Gloveman/CampProject1/assets/135544903/f6efd06d-4ae5-433b-ab24-1406f5e6f855)|![tab3_add](https://github.com/Gloveman/CampProject1/assets/135544903/6aaa9fbb-828d-409c-81a6-ccf20df674e3)|![tab3_edit](https://github.com/Gloveman/CampProject1/assets/135544903/d4009b0f-d414-4aa0-aba5-a6a2f931a5b8)|
