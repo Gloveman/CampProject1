@@ -18,12 +18,13 @@
 
     <Button
         android:id="@+id/shareButton"
-        android:layout_width="122dp"
-        android:layout_height="79dp"
-        android:background="@drawable/rounded_corner_contact"
-        android:text="공유"
-        android:textSize="35dp"
+        android:layout_width="104dp"
+        android:layout_height="63dp"
+        android:background="@drawable/rounded_button_background"
         android:elevation="4dp"
+        android:text="공유"
+        android:textColor="@color/white"
+        android:textSize="28dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
