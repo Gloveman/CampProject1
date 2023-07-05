@@ -29,6 +29,7 @@
 
         <Button
             android:id="@+id/finish_button"
+            android:background="@drawable/rounded_button_background"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="10dp"
@@ -36,6 +37,7 @@
 
         <Button
             android:id="@+id/cancel_button"
+            android:background="@drawable/rounded_button_background"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"

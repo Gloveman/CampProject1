@@ -16,6 +16,9 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         android:layout_marginStart="10dp"
+        android:datePickerMode="calendar"
+        android:background="@drawable/custom_calendar_selector"
+
         />
 
     <TextView
@@ -25,6 +28,7 @@
         android:layout_marginLeft="10dp"
         android:layout_marginTop="11dp"
         android:text="메모 목록"
+
         android:textAlignment="center"
         android:textSize="18sp"
         android:textStyle="bold"
@@ -55,6 +59,7 @@
         android:orientation="horizontal">
     <Button
         android:id="@+id/btnnew"
+        android:background="@drawable/rounded_button_background"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginRight="10dp"
@@ -64,6 +69,7 @@
         android:text="새 메모" />
     <Button
         android:id="@+id/btnchange"
+        android:background="@drawable/rounded_button_background"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginRight="10dp"
@@ -74,6 +80,7 @@
     <Button
         android:id="@+id/btndel"
         android:layout_width="wrap_content"
+        android:background="@drawable/rounded_button_background"
         android:layout_height="wrap_content"
         android:layout_marginRight="10dp"
         android:layout_marginLeft="10dp"
