@@ -112,7 +112,7 @@ class MainActivity : AppCompatActivity() {
                         tab.text = "Contacts"
                         tab.setIcon(R.drawable.contacticon)
                         tab.id=0
-                        tab.tabLabelVisibility=TabLayout.TAB_LABEL_VISIBILITY_UNLABELED
+                        tab.tabLabelVisibility=TabLayout.TAB_LABEL_VISIBILITY_LABELED
                     }
                     1 -> {
                         tab.text = "Gallery"
