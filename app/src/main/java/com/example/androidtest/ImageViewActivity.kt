@@ -29,7 +29,7 @@ class ImageViewActivity:AppCompatActivity() {
         binding= ActivityImageviewerBinding.inflate(layoutInflater)
         binding.imageviewPager.adapter=imgviewpageradapter(imgs,supportFragmentManager, lifecycle)
         binding.imageviewPager.currentItem = pos
-        window.statusBarColor= Color.WHITE
+        window.statusBarColor= 0xffffff
         setContentView(binding.root)
     }
     override fun onResume() {

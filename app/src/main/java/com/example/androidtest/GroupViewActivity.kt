@@ -34,7 +34,7 @@ class GroupViewActivity: AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding= ActivityContactgroupBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        window.statusBarColor= Color.WHITE
+        window.statusBarColor= 0xffffff
         groupname= intent.getStringExtra("groupname").toString()
         Log.d("NAME",groupname)
         var fileinput: FileInputStream?=null

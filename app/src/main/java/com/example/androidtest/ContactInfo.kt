@@ -76,13 +76,15 @@ class ContactInfo:Fragment() {
                     people.add(members.getString(j))
                 }
                 groupdata[item.getString("groupname")] = people
-
-                datas.add(ContactData(item.getString("groupname"),"Group", R.drawable.group))
+                if(item.getString("groupname")=="즐겨찾기")
+                    datas.add(ContactData(item.getString("groupname"),"Group", R.drawable.star))
+                else
+                    datas.add(ContactData(item.getString("groupname"),"Group", R.drawable.group))
             }
         }
         else{
             groupdata["즐겨찾기"]= mutableListOf()
-            datas.add(ContactData(" 즐겨찾기","Group",R.drawable.group))
+            datas.add(ContactData(" 즐겨찾기","Group",R.drawable.star))
             updateGroup()
         }
         val cursor=requireActivity().contentResolver.query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI,null,null,null,ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME)
@@ -205,12 +207,15 @@ class ContactInfo:Fragment() {
                     people.add(members.getString(j))
                 }
                 groupdata[item.getString("groupname")] = people
+                if(item.getString("groupname")=="즐겨찾기")
+                    datas.add(ContactData(item.getString("groupname"),"Group", R.drawable.star))
+                else
                 datas.add(ContactData(item.getString("groupname"),"Group", R.drawable.group))
             }
         }
         else{
             groupdata["즐겨찾기"]= mutableListOf()
-            datas.add(ContactData(" 즐겨찾기","Group",R.drawable.group))
+            datas.add(ContactData(" 즐겨찾기","Group",R.drawable.star))
             updateGroup()
         }
         contactData.forEach {

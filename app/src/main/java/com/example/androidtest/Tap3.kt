@@ -39,6 +39,7 @@ class Tap3 : Fragment() {
         val calendarView = binding.calendarView
         val memolistAdapter=memolistadapter(this.context)
 
+
         binding.memolist.adapter=memolistAdapter
         val curdate=Calendar.getInstance()
         datekey=curdate.get(Calendar.YEAR).toString()+(curdate.get(Calendar.MONTH)+1).toString()+curdate.get(Calendar.DAY_OF_MONTH).toString()

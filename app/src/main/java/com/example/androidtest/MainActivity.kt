@@ -37,7 +37,7 @@ class MainActivity : AppCompatActivity() {
                     var vp = binding.viewPager
                     var tl = binding.tabLayout
                     vp.adapter = viewpageradapter(supportFragmentManager, lifecycle)
-                   window.statusBarColor= 0xff1A2028.toInt()
+                    window.statusBarColor= 0xffffff
                     TabLayoutMediator(tl, vp) { tab, position ->
                         when (position) {
                             0 -> {
@@ -105,7 +105,7 @@ class MainActivity : AppCompatActivity() {
             var tl = binding.tabLayout
             vp.adapter = viewpageradapter(supportFragmentManager, lifecycle)
 
-            window.statusBarColor= 0xff1A2028.toInt()
+            window.statusBarColor= 0xffffff
             TabLayoutMediator(tl, vp) { tab, position ->
                 when (position) {
                     0 -> {
@@ -125,6 +125,26 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
             }.attach()
+            tl.addOnTabSelectedListener(object:TabLayout.OnTabSelectedListener{
+                override fun onTabSelected(tab: Tab?) {
+                    tab?.tabLabelVisibility=TabLayout.TAB_LABEL_VISIBILITY_LABELED
+                    when(tab?.id){
+                        0->tab.setIcon(R.drawable.contacticon)
+                        1->tab.setIcon(R.drawable.galleryicon)
+                        2->tab.setIcon(R.drawable.calendericon)
+                    }
+                }
+
+                override fun onTabUnselected(tab: Tab?) {
+                    tab?.tabLabelVisibility=TabLayout.TAB_LABEL_VISIBILITY_UNLABELED
+                    tab?.setIcon(R.drawable.nonvisibleicon)
+                }
+
+                override fun onTabReselected(tab: Tab?) {
+
+                }
+
+            })
             setContentView(binding.root)
         }
         else
