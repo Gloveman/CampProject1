@@ -2,10 +2,10 @@
 <font-family xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <font
-        android:font="@font/my_custom_font"
+        android:font="@font/myfont"
         android:fontStyle="normal"
         android:fontWeight="400"
-        app:font="@font/my_custom_font"
+        app:font="@font/myfont"
         app:fontStyle="normal"
         app:fontWeight="500" />
 </font-family>

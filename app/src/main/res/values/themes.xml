@@ -6,7 +6,7 @@
     </style>
     <style name="AppFont" parent="Theme.AppCompat.Light.NoActionBar">
 
-        <item name="android:fontFamily">@font/my_custom_font</item>
+        <item name="android:fontFamily">@font/myfont</item>
     </style>
     <style name="Theme.AndroidTest" parent="Base.Theme.AndroidTest" />
 </resources>
