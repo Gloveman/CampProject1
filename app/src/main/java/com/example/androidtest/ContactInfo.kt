@@ -79,7 +79,7 @@ class ContactInfo:Fragment() {
                 if(item.getString("groupname")=="즐겨찾기")
                     datas.add(ContactData(item.getString("groupname"),"Group", R.drawable.star))
                 else
-                    datas.add(ContactData(item.getString("groupname"),"Group", R.drawable.group))
+                    datas.add(ContactData(item.getString("groupname"),"Group", R.drawable.groupicon))
             }
         }
         else{
@@ -137,7 +137,7 @@ class ContactInfo:Fragment() {
                         dialog.setOnClickListener {
                             groupdata.getOrPut(it) { mutableListOf() }.add(s)
                             updateGroup()
-                            datas.add(1, ContactData(it,"Group",R.drawable.group))
+                            datas.add(1, ContactData(it,"Group",R.drawable.groupicon))
                             ListAdapter.datas=datas
                             ListAdapter.notifyDataSetChanged()
                             Toast.makeText(this.context, "추가 완료", Toast.LENGTH_SHORT).show()
@@ -210,7 +210,7 @@ class ContactInfo:Fragment() {
                 if(item.getString("groupname")=="즐겨찾기")
                     datas.add(ContactData(item.getString("groupname"),"Group", R.drawable.star))
                 else
-                datas.add(ContactData(item.getString("groupname"),"Group", R.drawable.group))
+                    datas.add(ContactData(item.getString("groupname"),"Group", R.drawable.groupicon))
             }
         }
         else{

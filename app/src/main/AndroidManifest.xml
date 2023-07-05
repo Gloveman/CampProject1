@@ -11,9 +11,9 @@
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@drawable/start_up"
+        android:icon="@drawable/icontest"
         android:label="@string/app_name"
-        android:roundIcon="@drawable/start_up"
+        android:roundIcon="@drawable/icontest"
         android:supportsRtl="true"
         android:theme="@style/AppFont"
         tools:targetApi="31">

@@ -13,11 +13,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
+        android:background="@drawable/custom_calendar_selector"
+        android:datePickerMode="calendar"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginStart="10dp"
-        android:datePickerMode="calendar"
-        android:background="@drawable/custom_calendar_selector"
+        app:layout_constraintTop_toTopOf="parent"
 
         />
 

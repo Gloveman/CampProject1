@@ -37,6 +37,7 @@ class Tap3 : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val calendarView = binding.calendarView
+
         val memolistAdapter=memolistadapter(this.context)
 
 
