@@ -47,7 +47,7 @@
 - ```contentResolver```를 통해 휴대폰의 연락처를 탐색할 수 있는 ```cursor```를 가져와 ```이름(DISPLAY_NAME)```과 ```전화번호(NUMBER)```를 참조한다.
   - 이를 위해 ```android.permission.READ_CONTACTS``` 권한 허용을 요청한다.
   - 옆에 표시되는 이미지의 경우 9개의 icon 중 random하게 표시된다. 
-- ```전화 걸기```와 ```문자 보내기```는 각각 적합한 ```Intent```를 만들고 ```data```로 전화번호를 추가하여 ```startActivity```로 실행된다.
+- ```전화 걸기```와 ```문자 보내기```는 각각 적합한 ```Intent```를 만들고 ```data```로 전화번호를 추가하여 실행된다.
   - 전화를 걸기 위해 ```android.permission.CALL_PHONE``` 권한 허용을 요청한다.
 - 그룹 데이터의 경우 앱의 내부 저장소에 JSON 파일로 저장했다. 
 
@@ -58,16 +58,17 @@
 
 
 #### Major features
-- 휴대폰 저장소에서 갤러리 이미지들을 직접 불러오기 위해 ```android.permission.READ_EXTERNAL_STORAGE``` 권한을 이용하였다.
+- 휴대폰에 저장된 사진들을 Grid 형식으로 보여준다.
 - 이미지를 누르면 해당 이미지를 전체 화면으로 보여주며 좌우 슬라이드를 통해 다음 또는 이전 이미지로 넘어갈 수 있다.
-- ```공유```버튼을 누르면 사진을 다른 앱으로 공유할 수 있다. 이를 위해 ```android.permission.INTERNET``` 권한을 이용한다.
+- ```공유```버튼을 누르면 사진을 다른 앱으로 공유할 수 있다.
 
 * * * * 
 #### 기술 설명
-
-- 휴대폰에 저장된 연락처를 직접 불러와서 이를 스크롤하며 연락처를 확인할 수 있다.
-  - 휴대폰의 연락처 데이터베이스에서 직접 불러오기 위해 ```android.permission.READ_CONTACTS``` 권한을 이용한다.
-
+- 연락처와 동일하게 ```contentResolver```를 이용해 사진들의 ```path```를 참조한다.
+  - 이를 위해 ```android.permission.READ_EXTERNAL_STORAGE``` 권한을 이용하였다.
+- 이미지를 ```View```에 표시하기 위해 ```Glide``` library를 사용했다.
+- 공유 기능의 경우 이미지의 ```content URI```를 가지고  ```Share Intent```를 만들어 실행했다.
+  - 이를 위해 ```android.permission.INTERNET``` 권한을 이용한다.
     
 # Tab3_calender & memo
 |scroll|add|edit|
@@ -80,6 +81,5 @@
 
 * * * * 
 #### 기술 설명
-- 메모는 모두 앱의 내부 저장소에 JSON 파일로 저장되어 있다.
-- 휴대폰에 저장된 연락처를 직접 불러와서 이를 스크롤하며 연락처를 확인할 수 있다.
-  - 휴대폰의 연락처 데이터베이스에서 직접 불러오기 위해 ```android.permission.READ_CONTACTS``` 권한을 이용한다.
+- 메모는 모두 앱의 내부 저장소에 JSON 파일로 저장되어 있다. 따라서 별도 권한을 필요로 하지 않는다.
+- ```메모 추가```와 ```메모 수정```시 별도의 ```customdialog```가 열린다. ```dialog```와 ```fragment```간 data 이동을 위해 ```Listener```를 구현하여 사용했다.
