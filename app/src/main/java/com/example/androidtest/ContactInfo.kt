@@ -38,6 +38,7 @@ class ContactInfo:Fragment() {
     var contactData= mutableListOf<ContactData>()
     val groupdata= mutableMapOf<String,MutableList<String>>()
     var query=""
+    var lastname=""
     override fun onCreateView(
         inflater:LayoutInflater,
         container:ViewGroup?,
@@ -91,22 +92,27 @@ class ContactInfo:Fragment() {
         while(cursor!!.moveToNext()){
 
             val name=cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME))
-            val number=cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER))
-            val randomIndex = Random.nextInt(9)
-            val imageResId = when(randomIndex){
-                0 ->R.drawable.icon1
-                1 ->R.drawable.icon2
-                2 ->R.drawable.icon3
-                3 ->R.drawable.icon4
-                4 ->R.drawable.icon5
-                5 ->R.drawable.icon6
-                6 ->R.drawable.icon7
-                7 ->R.drawable.icon8
-                else -> R.drawable.default_image
+            if(name!=lastname) {
+                val number =
+                    cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER))
+                val randomIndex = Random.nextInt(9)
+                val imageResId = when (randomIndex) {
+                    0 -> R.drawable.icon1
+                    1 -> R.drawable.icon2
+                    2 -> R.drawable.icon3
+                    3 -> R.drawable.icon4
+                    4 -> R.drawable.icon5
+                    5 -> R.drawable.icon6
+                    6 -> R.drawable.icon7
+                    7 -> R.drawable.icon8
+                    else -> R.drawable.default_image
+                }
+                contactData.add(ContactData(name = name, number = number, imageResId = imageResId))
+                datas.add(ContactData(name = name, number = number, imageResId = imageResId))
             }
-            contactData.add(ContactData(name=name,number=number,imageResId = imageResId))
-            datas.add(ContactData(name=name,number=number,imageResId = imageResId))
+            lastname=name
         }
+        lastname=""
         ListAdapter= listadapter(this.context)
         binding.contactlist.adapter=ListAdapter
         ListAdapter.setAddtoGroupListener { s ->
